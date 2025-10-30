@@ -1,5 +1,5 @@
 // Lokasi: com/app/tokosidia/adapter/BookAdapter.java
-package com.app.tokosidia.adapter;
+package com.app.bookverse.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.app.tokosidia.R;
-import com.app.tokosidia.model.Book;
-import com.app.tokosidia.ui.BookDetailFragment;
+import com.app.bookverse.R;
+import com.app.bookverse.model.Book;
+import com.app.bookverse.ui.BookDetailFragment;
 
 import java.util.List;
 

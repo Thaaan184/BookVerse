@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.tokosidia"
+    package="com.app.bookverse"
     xmlns:tools="http://schemas.android.com/tools">
 
 
@@ -16,7 +16,7 @@
 
         <!-- SplashScreen sebagai launcher -->
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.app.bookverse.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -27,7 +27,7 @@
 
         <!-- MainActivity sebagai tujuan setelah splash -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.app.bookverse.MainActivity"
             android:exported="true" />
     </application>
 

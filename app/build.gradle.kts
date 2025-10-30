@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.app.tokosidia"
+    namespace = "com.app.bookverse"
     compileSdk = 36
 
     defaultConfig {

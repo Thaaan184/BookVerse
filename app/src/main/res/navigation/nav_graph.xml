@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.app.tokosidia.ui.BookListFragment"
+        android:name="com.app.bookverse.ui.BookListFragment"
         android:label="BookVerse" > <action
         android:id="@+id/action_productListFragment_to_productDetailFragment"
         app:destination="@id/productDetailFragment" />
@@ -13,13 +13,13 @@
 
     <dialog
         android:id="@+id/productDetailFragment"
-        android:name="com.app.tokosidia.ui.BookDetailFragment"
+        android:name="com.app.bookverse.ui.BookDetailFragment"
         android:label="Detail Buku" />
 
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.app.tokosidia.ui.WishlistFragment"
+        android:name="com.app.bookverse.ui.WishlistFragment"
         android:label="Wishlist" /> <fragment
     android:id="@+id/accountFragment"
-    android:name="com.app.tokosidia.ui.AccountFragment"
+    android:name="com.app.bookverse.ui.AccountFragment"
     android:label="Akun" /> </navigation>

@@ -1,12 +1,11 @@
-// Lokasi: com/app/tokosidia/MainActivity.java
-package com.app.tokosidia;
+package com.app.bookverse;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-import com.app.tokosidia.databinding.ActivityMainBinding;
+import com.app.bookverse.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

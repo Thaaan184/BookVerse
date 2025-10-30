@@ -1,5 +1,5 @@
 // Lokasi: com/app/tokosidia/ui/BookDetailFragment.java
-package com.app.tokosidia.ui;
+package com.app.bookverse.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.app.tokosidia.R;
-import com.app.tokosidia.model.Book;
+import com.app.bookverse.R;
+import com.app.bookverse.model.Book;
 // Import ViewBinding
-import com.app.tokosidia.databinding.FragmentProductDetailBinding;
+import com.app.bookverse.databinding.FragmentProductDetailBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BookDetailFragment extends BottomSheetDialogFragment {

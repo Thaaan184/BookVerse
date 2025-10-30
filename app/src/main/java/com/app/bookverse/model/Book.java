@@ -1,5 +1,5 @@
 // Lokasi: com/app/tokosidia/model/Book.java
-package com.app.tokosidia.model;
+package com.app.bookverse.model;
 
 public class Book {
 

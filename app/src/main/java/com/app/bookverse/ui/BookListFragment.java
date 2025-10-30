@@ -1,4 +1,4 @@
-package com.app.tokosidia.ui;
+package com.app.bookverse.ui;
 
 import android.os.Bundle;
 import android.view.*;
@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.app.tokosidia.R;
-import com.app.tokosidia.adapter.BookAdapter;
-import com.app.tokosidia.model.Book;
+import com.app.bookverse.R;
+import com.app.bookverse.adapter.BookAdapter;
+import com.app.bookverse.model.Book;
 // Import ViewBinding
-import com.app.tokosidia.databinding.FragmentProductListBinding;
+import com.app.bookverse.databinding.FragmentProductListBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;

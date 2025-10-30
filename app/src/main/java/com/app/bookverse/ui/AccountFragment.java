@@ -1,11 +1,11 @@
-package com.app.tokosidia.ui;
+package com.app.bookverse.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
-import com.app.tokosidia.databinding.FragmentAccountBinding;
+import com.app.bookverse.databinding.FragmentAccountBinding;
 
 public class AccountFragment extends Fragment {
 
