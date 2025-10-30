@@ -1,3 +1,4 @@
+// Lokasi: com/app/tokosidia/model/Book.java
 package com.app.tokosidia.model;
 
 public class Book {
@@ -9,7 +10,6 @@ public class Book {
     private float rating;
     private int imageResId;
 
-    // Konstruktor disesuaikan untuk menerima 'author'
     public Book(String title, String author, double price, String description, float rating, int imageResId) {
         this.title = title;
         this.author = author;
@@ -19,7 +19,6 @@ public class Book {
         this.imageResId = imageResId;
     }
 
-    // Getter method
     public String getTitle() { return title; }
     public String getAuthor() { return author; }
     public double getPrice() { return price; }

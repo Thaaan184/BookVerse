@@ -1,3 +1,4 @@
+// Lokasi: com/app/tokosidia/adapter/BookAdapter.java
 package com.app.tokosidia.adapter;
 
 import android.content.Context;
@@ -11,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.tokosidia.R;
-// Import model dan fragment yang baru
 import com.app.tokosidia.model.Book;
 import com.app.tokosidia.ui.BookDetailFragment;
 
@@ -19,13 +19,12 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
-    // Konstanta ini tetap sama, merujuk ke file Anda
     public static final int TYPE_LIST = 0;
     public static final int TYPE_GRID = 1;
     public static final int TYPE_CARD = 2;
 
     private Context context;
-    private List<Book> bookList; // Diganti dari Product ke Book
+    private List<Book> bookList;
     private int viewType;
 
     public BookAdapter(Context context, List<Book> bookList, int viewType) {
@@ -38,7 +37,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layout;
-        // Logika ini tetap sama, menggunakan layout XML yang Anda sediakan
+        // Logika ini sudah benar, menggunakan nama layout Anda
         if (this.viewType == TYPE_GRID) {
             layout = R.layout.item_product_grid;
         } else if (this.viewType == TYPE_CARD) {
@@ -53,16 +52,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Book book = bookList.get(position); // Diganti ke Book
+        Book book = bookList.get(position);
 
-        // Layout Anda (item_product_...) memiliki 'txtName'
-        // Kita isi 'txtName' dengan judul buku
+        // Mengisi 'txtName' di XML dengan Judul Buku
         holder.txtName.setText(book.getTitle());
         holder.txtPrice.setText("Rp " + book.getPrice());
         holder.imgProduct.setImageResource(book.getImageResId());
 
+        // (Layout item list/grid/card Anda tidak punya txtAuthor, jadi kita tidak set di sini)
+
         holder.itemView.setOnClickListener(v -> {
-            // Mengarahkan ke BookDetailFragment
             BookDetailFragment detailFragment = BookDetailFragment.newInstance(book);
             detailFragment.show(((androidx.fragment.app.FragmentActivity) context)
                     .getSupportFragmentManager(), "BookDetail");
@@ -71,14 +70,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return bookList.size(); // Diganti ke bookList
+        return bookList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtPrice;
         ImageView imgProduct;
 
-        // ViewHolder tetap sama, me-mapping ke ID di XML Anda
+        // ID ini (txtName, txtPrice, imgProduct) harus ada di 
+        // ketiga file layout item Anda (item_product_list, grid, card)
         ViewHolder(View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
