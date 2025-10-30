@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Tokosidia"
+rootProject.name = "BookVerse"
 include(":app")
