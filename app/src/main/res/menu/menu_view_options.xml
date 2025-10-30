@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_list"
+        android:title="List View"
+        android:icon="@drawable/ic_list"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_grid"
+        android:title="Grid View"
+        android:icon="@drawable/ic_grid"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_card"
+        android:title="Card View"
+        android:icon="@drawable/ic_card"
+        android:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_filter"
+        android:title="Filter"
+        android:icon="@drawable/ic_filter"
+        android:showAsAction="ifRoom" />
+</menu>

@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:text="Nama Produk"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:text="Rp 0"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txtDesc"
+        android:text="Deskripsi produk di sini"
+        android:paddingTop="4dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnBuy"
+        android:text="Beli Sekarang"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+</LinearLayout>
