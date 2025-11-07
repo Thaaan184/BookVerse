@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="supabase_url">https://uzonthrhqdsxkhjixhnh.supabase.co/rest/v1/</string>
+    <string name="supabase_api_key">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6b250aHJocWRzeGtoaml4aG5oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1MzkzMDcsImV4cCI6MjA3ODExNTMwN30.Jx1agdmOv8E2tD2k9xZH-BSFqkt8QjKzH1sWSGBIGvM</string>
+
+    <!-- BASE URL untuk storage (public uploads). Gunakan tanpa tambahan filename -->
+    <string name="supabase_storage_base">https://uzonthrhqdsxkhjixhnh.supabase.co/storage/v1/object/public/uploads/</string>
+</resources>

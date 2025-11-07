@@ -46,7 +46,7 @@ public class BookListFragment extends Fragment {
     }
 
     private void fetchBooks() {
-        ApiService api = RetrofitClient.getClient().create(ApiService.class);
+        ApiService api = RetrofitClient.getClient(requireContext()).create(ApiService.class);
         api.getBooks().enqueue(new Callback<List<Book>>() {
             @Override
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {

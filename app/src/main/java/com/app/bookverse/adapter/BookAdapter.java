@@ -1,12 +1,14 @@
 package com.app.bookverse.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.app.bookverse.R;
 import com.app.bookverse.model.Book;
@@ -22,11 +24,18 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private Context context;
     private List<Book> bookList;
     private int viewType;
+    private String storageBaseUrl; // base dari values
 
     public BookAdapter(Context context, List<Book> bookList, int viewType) {
         this.context = context;
         this.bookList = bookList;
         this.viewType = viewType;
+
+        // Ambil base url dari resources (values/api.xml)
+        this.storageBaseUrl = ContextCompat.getString(context, R.string.supabase_storage_base);
+        if (!this.storageBaseUrl.endsWith("/")) {
+            this.storageBaseUrl = this.storageBaseUrl + "/";
+        }
     }
 
     @NonNull
@@ -47,12 +56,38 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Book book = bookList.get(position);
-        holder.txtName.setText(book.getTitle());
-        holder.txtPrice.setText("Rp " + book.getPrice());
+
+        holder.txtName.setText(book.getTitle() != null ? book.getTitle() : "-");
+        double price = book.getPrice();
+        holder.txtPrice.setText("Rp " + String.format("%,.0f", price));
+
+        String cover = book.getCover();
+        String imageUrl = null;
+
+        if (!TextUtils.isEmpty(cover)) {
+            cover = cover.trim();
+
+            // Jika sudah full URL (http/https), gunakan langsung
+            if (cover.startsWith("http://") || cover.startsWith("https://")) {
+                imageUrl = cover;
+            } else {
+                // Jika ada prefix uploads/ atau hanya filename, hapus "uploads/" jika ada
+                String fileName = cover;
+                if (fileName.startsWith("uploads/")) {
+                    fileName = fileName.substring("uploads/".length());
+                }
+                // Gabungkan dengan base storage
+                imageUrl = storageBaseUrl + fileName;
+            }
+        }
+
+        // Gunakan Glide dengan fallback placeholder
         Glide.with(context)
-                .load("http://192.168.1.6:3000/" + book.getCover())
-                .placeholder(R.drawable.placeholder)
+                .load(imageUrl) // jika imageUrl null, Glide akan menampilkan placeholder
+                .placeholder(R.drawable.placeholder) // pastikan drawable ada
+                .error(R.drawable.placeholder)
                 .into(holder.imgProduct);
+
         holder.itemView.setOnClickListener(v -> {
             BookDetailFragment detailFragment = BookDetailFragment.newInstance(book.getId());
             detailFragment.show(((androidx.fragment.app.FragmentActivity) context)
@@ -62,7 +97,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return bookList.size();
+        return bookList != null ? bookList.size() : 0;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

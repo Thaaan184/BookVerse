@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import com.app.bookverse.api.RetrofitClient;
 import com.app.bookverse.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // 1. Set Toolbar sebagai Action Bar utama (sesuai soal)
+        // Inisialisasi RetrofitClient dengan konteks dari activity
+        RetrofitClient.getClient(this);
+
+        // 1. Set Toolbar sebagai Action Bar utama
         setSupportActionBar(binding.toolbar);
 
         // 2. Ambil NavController dari NavHostFragment
@@ -27,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
 
         // 3. Hubungkan Action Bar (Toolbar) dengan NavController
-        // Ini akan otomatis mengubah judul di Toolbar
         NavigationUI.setupActionBarWithNavController(this, navController);
 
-        // 4. Hubungkan BottomNavigationView dengan NavController (kode asli Anda)
+        // 4. Hubungkan BottomNavigationView dengan NavController
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
     }
 

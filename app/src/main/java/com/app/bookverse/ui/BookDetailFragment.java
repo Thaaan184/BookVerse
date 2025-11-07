@@ -13,6 +13,7 @@ import com.app.bookverse.databinding.FragmentProductDetailBinding;
 import com.app.bookverse.model.Book;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,27 +41,26 @@ public class BookDetailFragment extends BottomSheetDialogFragment {
     }
 
     private void fetchBookDetail(int id) {
-        ApiService api = RetrofitClient.getClient().create(ApiService.class);
-        api.getBookById(id).enqueue(new Callback<Book>() {
+        ApiService api = RetrofitClient.getClient(requireContext()).create(ApiService.class);
+        api.getBookById(id).enqueue(new Callback<List<Book>>() {
             @Override
-            public void onResponse(Call<Book> call, Response<Book> response) {
-                if (response.isSuccessful()) {
-                    Book book = response.body();
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    Book book = response.body().get(0);
                     binding.txtName.setText(book.getTitle());
                     binding.txtAuthor.setText(book.getAuthor());
                     binding.txtPrice.setText("Rp " + book.getPrice());
                     binding.txtDesc.setText(book.getDescription());
                     binding.ratingBar.setRating(book.getRating());
                     Glide.with(getContext())
-                            .load("http://192.168.1.6:3000/" + book.getCover())
+                            .load("https://yourproject.supabase.co/storage/v1/object/public/" + book.getCover()) // Gunakan path langsung dari cover
                             .placeholder(R.drawable.placeholder)
                             .into(binding.imgProduct);
                 }
             }
 
             @Override
-            public void onFailure(Call<Book> call, Throwable t) {
-                // Tambahkan Toast atau log untuk error handling jika perlu
+            public void onFailure(Call<List<Book>> call, Throwable t) {
             }
         });
     }
