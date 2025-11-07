@@ -1,4 +1,3 @@
-// Lokasi: com/app/tokosidia/ui/BookDetailFragment.java
 package com.app.bookverse.ui;
 
 import android.os.Bundle;
@@ -7,64 +6,68 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.app.bookverse.R;
-import com.app.bookverse.model.Book;
-// Import ViewBinding
+import com.app.bookverse.api.ApiService;
+import com.app.bookverse.api.RetrofitClient;
 import com.app.bookverse.databinding.FragmentProductDetailBinding;
+import com.app.bookverse.model.Book;
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BookDetailFragment extends BottomSheetDialogFragment {
-
-    // Gunakan ViewBinding
     private FragmentProductDetailBinding binding;
+    private static final String ARG_ID = "id";
 
-    private static final String ARG_NAME = "name";
-    private static final String ARG_AUTHOR = "author"; // Ditambahkan
-    private static final String ARG_PRICE = "price";
-    private static final String ARG_DESC = "desc";
-    private static final String ARG_RATING = "rating";
-    private static final String ARG_IMAGE = "image";
-
-    public static BookDetailFragment newInstance(Book book) {
+    public static BookDetailFragment newInstance(int bookId) {
         BookDetailFragment fragment = new BookDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_NAME, book.getTitle());
-        args.putString(ARG_AUTHOR, book.getAuthor()); // Ditambahkan
-        args.putDouble(ARG_PRICE, book.getPrice());
-        args.putString(ARG_DESC, book.getDescription());
-        args.putFloat(ARG_RATING, book.getRating());
-        args.putInt(ARG_IMAGE, book.getImageResId());
+        args.putInt(ARG_ID, bookId);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        // Inflate menggunakan ViewBinding
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentProductDetailBinding.inflate(inflater, container, false);
-
-        Bundle args = getArguments();
-        if (args != null) {
-            // Akses view melalui binding
-            binding.txtName.setText(args.getString(ARG_NAME));
-            binding.txtAuthor.setText(args.getString(ARG_AUTHOR)); // Ditambahkan
-            binding.txtPrice.setText("Rp " + args.getDouble(ARG_PRICE));
-            binding.txtDesc.setText(args.getString(ARG_DESC));
-            binding.ratingBar.setRating(args.getFloat(ARG_RATING));
-            binding.imgProduct.setImageResource(args.getInt(ARG_IMAGE));
-        }
-
+        int bookId = getArguments().getInt(ARG_ID);
+        fetchBookDetail(bookId);
         binding.btnBuy.setOnClickListener(v -> dismiss());
-
         return binding.getRoot();
+    }
+
+    private void fetchBookDetail(int id) {
+        ApiService api = RetrofitClient.getClient().create(ApiService.class);
+        api.getBookById(id).enqueue(new Callback<Book>() {
+            @Override
+            public void onResponse(Call<Book> call, Response<Book> response) {
+                if (response.isSuccessful()) {
+                    Book book = response.body();
+                    binding.txtName.setText(book.getTitle());
+                    binding.txtAuthor.setText(book.getAuthor());
+                    binding.txtPrice.setText("Rp " + book.getPrice());
+                    binding.txtDesc.setText(book.getDescription());
+                    binding.ratingBar.setRating(book.getRating());
+                    Glide.with(getContext())
+                            .load("http://192.168.1.6:3000/" + book.getCover())
+                            .placeholder(R.drawable.placeholder)
+                            .into(binding.imgProduct);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Book> call, Throwable t) {
+                // Tambahkan Toast atau log untuk error handling jika perlu
+            }
+        });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null; // Hindari memory leak
+        binding = null;
     }
 }

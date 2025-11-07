@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.bookverse"
     xmlns:tools="http://schemas.android.com/tools">
-
-
+    <!-- Permission untuk akses internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/logo"
@@ -13,7 +14,6 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tokosidia">
-
         <!-- SplashScreen sebagai launcher -->
         <activity
             android:name="com.app.bookverse.SplashScreenActivity"
@@ -24,11 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- MainActivity sebagai tujuan setelah splash -->
+        <!-- MainActivity -->
         <activity
             android:name="com.app.bookverse.MainActivity"
             android:exported="true" />
     </application>
-
 </manifest>
